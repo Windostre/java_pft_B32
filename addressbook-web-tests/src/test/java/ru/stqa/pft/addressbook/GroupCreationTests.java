@@ -73,7 +73,7 @@ public class GroupCreationTests {
   public void tearDown() {
     wd.quit();
   }
-  
+
   private boolean isElementPresent(By by) {
     try {
       wd.findElement(by);
