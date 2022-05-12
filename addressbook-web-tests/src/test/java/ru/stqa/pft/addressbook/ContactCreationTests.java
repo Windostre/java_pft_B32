@@ -32,7 +32,10 @@ public class ContactCreationTests {
   public void testContactCreationTests() throws Exception {
 
     initContactCreation();
-    fillContactForm(new ContactData("NewFirstName", "NewMiddleName", "NewLastName", "NewNick", "Mr.", "Big Company", "000000000, г. Город, Локомотивная, 7", "+16042107931", "testmail@mail.com"));
+    fillContactForm(new ContactData("NewFirstName", "NewMiddleName", "NewLastName",
+            "NewNick", "Mr.", "Big Company", "000000000, г. Город, Локомотивная, 7",
+            "+16042107931", "testmail@mail.com"),
+            new CalendarData("January", "1", "1999"), "test1");
     submitContactCreation();
     gotoHomePage();
     logout();
@@ -50,7 +53,7 @@ public class ContactCreationTests {
     wd.findElement(By.xpath("//input[21]")).click();
   }
 
-  private void fillContactForm(ContactData contactData) {
+  private void fillContactForm(ContactData contactData, CalendarData calendarData, String group) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
@@ -79,16 +82,16 @@ public class ContactCreationTests {
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     wd.findElement(By.name("bday")).click();
-    new Select(wd.findElement(By.name("bday"))).selectByVisibleText("1");
+    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(calendarData.getDay());
     wd.findElement(By.xpath("//option[@value='1']")).click();
     wd.findElement(By.name("bmonth")).click();
-    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText("January");
+    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(calendarData.getMonth());
     wd.findElement(By.xpath("//option[@value='January']")).click();
     wd.findElement(By.name("byear")).click();
     wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys("1999");
+    wd.findElement(By.name("byear")).sendKeys(calendarData.getYear());
     wd.findElement(By.name("new_group")).click();
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("test1");
+    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(group);
     wd.findElement(By.xpath("//div[@id='content']/form/select[5]/option[2]")).click();
   }
 
