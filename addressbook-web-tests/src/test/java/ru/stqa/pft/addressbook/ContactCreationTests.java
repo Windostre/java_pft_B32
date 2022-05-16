@@ -32,13 +32,24 @@ public class ContactCreationTests {
   public void testContactCreationTests() throws Exception {
 
     initContactCreation();
-    fillContactForm(new ContactData("NewFirstName", "NewMiddleName", "NewLastName",
-            "NewNick", "Mr.", "Big Company", "000000000, г. Город, Локомотивная, 7",
-            "+16042107931", "testmail@mail.com"),
-            new CalendarData("January", "1", "1999"), "test1");
+    fillContactForm(new ContactData("NewFirstName", "NewLastName", "New Company"
+            , "г. Город, Локомотивная, 7", "+1604210793", "+test@mail.com"));
+    fillCalendarData(2, 2, "1999");
     submitContactCreation();
     gotoHomePage();
     logout();
+  }
+
+  private void fillCalendarData(int day, int month, String year) {
+    wd.findElement(By.name("bday")).click();
+    new Select(wd.findElement(By.name("bday"))).selectByIndex(day);
+   // wd.findElement(By.xpath("//option[3]")).click();
+    wd.findElement(By.name("bmonth")).click();
+    new Select(wd.findElement(By.name("bmonth"))).selectByIndex(month);
+   // wd.findElement(By.xpath("//select[2]/option[2]")).click();
+    wd.findElement(By.name("byear")).click();
+    wd.findElement(By.name("byear")).clear();
+    wd.findElement(By.name("byear")).sendKeys(year);
   }
 
   private void logout() {
@@ -53,22 +64,13 @@ public class ContactCreationTests {
     wd.findElement(By.xpath("//input[21]")).click();
   }
 
-  private void fillContactForm(ContactData contactData, CalendarData calendarData, String group) {
+  private void fillContactForm(ContactData contactData) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-    wd.findElement(By.name("middlename")).click();
-    wd.findElement(By.name("middlename")).clear();
-    wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
     wd.findElement(By.name("lastname")).click();
     wd.findElement(By.name("lastname")).clear();
     wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-    wd.findElement(By.name("nickname")).click();
-    wd.findElement(By.name("nickname")).clear();
-    wd.findElement(By.name("nickname")).sendKeys(contactData.getNickName());
-    wd.findElement(By.name("title")).click();
-    wd.findElement(By.name("title")).clear();
-    wd.findElement(By.name("title")).sendKeys(contactData.getTitle());
     wd.findElement(By.name("company")).click();
     wd.findElement(By.name("company")).clear();
     wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
@@ -81,18 +83,6 @@ public class ContactCreationTests {
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
-    wd.findElement(By.name("bday")).click();
-    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(calendarData.getDay());
-    wd.findElement(By.xpath("//option[@value='1']")).click();
-    wd.findElement(By.name("bmonth")).click();
-    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(calendarData.getMonth());
-    wd.findElement(By.xpath("//option[@value='January']")).click();
-    wd.findElement(By.name("byear")).click();
-    wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys(calendarData.getYear());
-    wd.findElement(By.name("new_group")).click();
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(group);
-    wd.findElement(By.xpath("//div[@id='content']/form/select[5]/option[2]")).click();
   }
 
   private void initContactCreation() {
