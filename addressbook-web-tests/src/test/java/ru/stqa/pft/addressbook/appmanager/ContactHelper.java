@@ -12,43 +12,29 @@ public class ContactHelper extends  HelperBase {
   }
 
   public void fillCalendarData(int day, int month, String year) {
-    wd.findElement(By.name("bday")).click();
+    click(By.name("bday"));
     new Select(wd.findElement(By.name("bday"))).selectByIndex(day);
     // wd.findElement(By.xpath("//option[3]")).click();
-    wd.findElement(By.name("bmonth")).click();
+    click(By.name("bmonth"));
     new Select(wd.findElement(By.name("bmonth"))).selectByIndex(month);
     // wd.findElement(By.xpath("//select[2]/option[2]")).click();
-    wd.findElement(By.name("byear")).click();
-    wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys(year);
+    type(By.name("byear"), year);
   }
 
   public void submitContactCreation() {
-    wd.findElement(By.xpath("//input[21]")).click();
+    click(By.xpath("//input[21]"));
   }
 
   public void fillContactForm(ContactData contactData) {
-    wd.findElement(By.name("firstname")).click();
-    wd.findElement(By.name("firstname")).clear();
-    wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-    wd.findElement(By.name("lastname")).click();
-    wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-    wd.findElement(By.name("company")).click();
-    wd.findElement(By.name("company")).clear();
-    wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
-    wd.findElement(By.name("address")).click();
-    wd.findElement(By.name("address")).clear();
-    wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
-    wd.findElement(By.name("mobile")).click();
-    wd.findElement(By.name("mobile")).clear();
-    wd.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
-    wd.findElement(By.name("email")).click();
-    wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("company"), contactData.getCompany());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("mobile"), contactData.getMobile());
+    type(By.name("email"), contactData.getEmail());
   }
 
   public void initContactCreation() {
-    wd.findElement(By.linkText("add new")).click();
+    click(By.linkText("add new"));
   }
 }
