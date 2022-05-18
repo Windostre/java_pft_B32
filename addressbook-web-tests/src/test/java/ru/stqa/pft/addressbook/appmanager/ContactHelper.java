@@ -11,14 +11,14 @@ public class ContactHelper extends  HelperBase {
     super(wd);
   }
 
-  public void fillCalendarData(int day, int month, String year) {
+  public void fillCalendarData(ContactData contactData) {
     click(By.name("bday"));
-    new Select(wd.findElement(By.name("bday"))).selectByIndex(day);
+    new Select(wd.findElement(By.name("bday"))).selectByIndex(contactData.getDay());
     // wd.findElement(By.xpath("//option[3]")).click();
     click(By.name("bmonth"));
-    new Select(wd.findElement(By.name("bmonth"))).selectByIndex(month);
+    new Select(wd.findElement(By.name("bmonth"))).selectByIndex(contactData.getMonth());
     // wd.findElement(By.xpath("//select[2]/option[2]")).click();
-    type(By.name("byear"), year);
+    type(By.name("byear"), contactData.getYear());
   }
 
   public void submitContactCreation() {
@@ -48,7 +48,7 @@ public class ContactHelper extends  HelperBase {
   }
 
   public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img"));
+    click(By.xpath("//img[@alt='Edit']"));
   }
 
   public void submitContactModification() {

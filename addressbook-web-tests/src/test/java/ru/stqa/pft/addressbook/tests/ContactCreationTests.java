@@ -10,8 +10,9 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreationTests() throws Exception {
     app.getContactHelper().initContactCreation();
     app.getContactHelper().fillContactForm(new ContactData("NewFirstName", "NewLastName", "New Company"
-            , "г. Город, Локомотивная, 7", "+1604210793", "test@mail.com"));
-    app.getContactHelper().fillCalendarData(2, 2, "1999");
+            , "г. Город, Локомотивная, 7", "+1604210793", "test@mail.com", 0, 0, null));
+    //app.getContactHelper().fillCalendarData(new ContactData(null, null, null, null
+     //       , null, null, 2, 2, "1999"));
     app.getContactHelper().submitContactCreation();
     app.getNavigationHelper().gotoHomePage();
     app.logout();
