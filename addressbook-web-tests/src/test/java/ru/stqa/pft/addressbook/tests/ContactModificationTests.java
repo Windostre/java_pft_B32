@@ -9,7 +9,7 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Edited", "Edited", "Edited Company"
-            , "city City, Lokomotivnaya STR, 7", "+900000000", "edited@mail.com", 2, 2, null));
+            , "city City, Lokomotivnaya STR, 7", "+900000000", "edited@mail.com", 2, 2, "2022"));
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();
 

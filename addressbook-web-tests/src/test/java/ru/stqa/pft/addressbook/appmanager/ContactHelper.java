@@ -11,16 +11,6 @@ public class ContactHelper extends  HelperBase {
     super(wd);
   }
 
-  public void fillCalendarData(ContactData contactData) {
-    click(By.name("bday"));
-    new Select(wd.findElement(By.name("bday"))).selectByIndex(contactData.getDay());
-    // wd.findElement(By.xpath("//option[3]")).click();
-    click(By.name("bmonth"));
-    new Select(wd.findElement(By.name("bmonth"))).selectByIndex(contactData.getMonth());
-    // wd.findElement(By.xpath("//select[2]/option[2]")).click();
-    type(By.name("byear"), contactData.getYear());
-  }
-
   public void submitContactCreation() {
     click(By.xpath("//input[21]"));
   }
@@ -32,6 +22,11 @@ public class ContactHelper extends  HelperBase {
     type(By.name("address"), contactData.getAddress());
     type(By.name("mobile"), contactData.getMobile());
     type(By.name("email"), contactData.getEmail());
+    click(By.name("bday"));
+    new Select(wd.findElement(By.name("bday"))).selectByIndex(contactData.getDay());
+    click(By.name("bmonth"));
+    new Select(wd.findElement(By.name("bmonth"))).selectByIndex(contactData.getMonth());
+    type(By.name("byear"), contactData.getYear());
   }
 
   public void initContactCreation() {
