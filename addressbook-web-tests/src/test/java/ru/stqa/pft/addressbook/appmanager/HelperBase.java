@@ -37,10 +37,10 @@ public class HelperBase {
   }
 
   public boolean isAlertPresent() {
-    try {
+    try {                                   // Перехват исключений сначала выполенине блока кода
       wd.switchTo().alert();
       return true;
-    } catch (NoAlertPresentException e) {
+    } catch (NoAlertPresentException e) {   // Если получили исключение, перехватываем
       return false;
     }
   }
