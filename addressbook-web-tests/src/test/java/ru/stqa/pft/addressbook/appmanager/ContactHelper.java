@@ -30,9 +30,13 @@ public class ContactHelper extends HelperBase {
     type(By.name("byear"), contactData.getYear());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if (contactData.getGroup() != null) {
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      } else {
+        new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
+      }
     } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
@@ -56,4 +60,14 @@ public class ContactHelper extends HelperBase {
   public void submitContactModification() {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
+
+  public void createContact(ContactData contact) {
+    initContactCreation();
+    fillContactForm(contact, true);
+    submitContactCreation();
+  }
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
 }
