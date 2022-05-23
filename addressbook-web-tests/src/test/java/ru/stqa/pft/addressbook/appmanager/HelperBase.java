@@ -27,20 +27,20 @@ public class HelperBase {
     }
   }
 
-  public boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
   public boolean isAlertPresent() {
     try {                                   // Перехват исключений сначала выполенине блока кода
       wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {   // Если получили исключение, перехватываем
+      return false;
+    }
+  }
+
+  public boolean isElementPresent(By locator) {
+    try {
+      wd.findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex) {
       return false;
     }
   }
