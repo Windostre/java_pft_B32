@@ -8,9 +8,9 @@ public class Collections {
 
   public static void main(String[] args) {
     String[] langs = {"Java", "C#", "Python", "PHP"};
-    List<String> languages = Arrays.asList("Java", "C#", "Python", "French");
+    List languages = Arrays.asList("Java", "C#", "Python", "French");
 
-    for (String l : languages) {
+    for (Object l : languages) {
       System.out.println("Я хочу выучить " + l);
     }
   }
