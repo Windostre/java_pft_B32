@@ -17,3 +17,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 *.class
+addressbook-web-tests/out/test/classes/ru/stqa/pft/addressbook/appmanager/GroupHelper.class
+*.class
