@@ -24,7 +24,7 @@ public class GroupDeletionTests extends TestBase {
     Assert.assertEquals(after.size(), before.size() - 1); // проверка размеров списка
 
     before.remove(before.size() - 1);
-      Assert.assertEquals(before, after); // проверка элементов списка
+    Assert.assertEquals(before, after); // проверка элементов списка цикл встроен в testng
 
     app.logout();
   }
