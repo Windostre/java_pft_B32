@@ -18,9 +18,9 @@ public class GroupModificationTests extends TestBase {
     }
     /* Тест */
     List<GroupData> before = app.getGroupHelper().getGroupList(); // список групп до
-    app.getGroupHelper().selectGroup(before.size() -1);
+    app.getGroupHelper().selectGroup(before.size() - 1); // выбран последний эллемент
     app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData("edited1", "edited2", "edited2");
+    GroupData group = new GroupData(before.get(before.size() - 1).getId(),"test1", "edited2", "edited3");
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnToGroupPage();
@@ -29,8 +29,8 @@ public class GroupModificationTests extends TestBase {
 
     before.remove(before.size() - 1);
     before.add(group);
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // проверка элементов списка - списки преобразованы в множества
 
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // // проверка элементов списка
     app.logout();
   }
 
