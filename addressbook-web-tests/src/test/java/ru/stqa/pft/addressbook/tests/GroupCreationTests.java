@@ -17,7 +17,7 @@ public class GroupCreationTests extends TestBase {
     app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList(); // количество групп после
     Assert.assertEquals(after.size(), before.size() + 1);
-    int maxId = 0;
+    int maxId = 0; // допущение, что id новой группы должен быть максимальным
     for (GroupData g : after) {
       if (g.getId() > maxId) {
         maxId = g.getId();
