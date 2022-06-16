@@ -21,6 +21,5 @@ public class ContactCreationTests extends TestBase {
             , 2, 2, "1999", null), true);
     app.getContactHelper().submitContactCreation();
     app.getNavigationHelper().gotoHomePage();
-    app.logout();
   }
 }

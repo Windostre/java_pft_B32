@@ -42,11 +42,9 @@ public class ApplicationManager {
     sessionHelper.login("admin", "secret");
   }
 
-  public void logout() {
-    wd.findElement(By.linkText("Logout")).click();
-  }
 
   public void stop() {
+    sessionHelper.logout();
     wd.quit();
   }
 

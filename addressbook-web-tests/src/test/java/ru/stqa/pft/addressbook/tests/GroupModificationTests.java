@@ -35,7 +35,6 @@ public class GroupModificationTests extends TestBase {
 
     // Метод сортировка до лямбда выражения и сравнениея Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // проверка элементов списка - списки преобразованы в множества
 
-    app.logout();
   }
 
 }

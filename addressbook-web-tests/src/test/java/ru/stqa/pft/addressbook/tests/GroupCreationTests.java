@@ -47,7 +47,6 @@ public class GroupCreationTests extends TestBase {
     after.sort(byId);
 
     Assert.assertEquals(before, after); // проверка элементов списка - списки преобразованы в множества
-    app.logout(); // в лекции логаута нет
   }
 
 }
