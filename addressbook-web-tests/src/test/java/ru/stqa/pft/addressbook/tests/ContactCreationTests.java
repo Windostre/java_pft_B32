@@ -6,6 +6,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
@@ -21,12 +22,24 @@ public class ContactCreationTests extends TestBase {
     app.getNavigationHelper().gotoHomePage();
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().initContactCreation();
-    app.getContactHelper().fillContactForm(new ContactData("NewFirstName", "NewLastName", null
+    ContactData contact = new ContactData("NewFirstName", "NewLastName", null
             , null, "+1604210793", "test@mail.com"
-            , 2, 2, null, null), true);
+            , 2, 2, null, null);
+    app.getContactHelper().fillContactForm(contact, true);
     app.getContactHelper().submitContactCreation();
     app.getNavigationHelper().gotoHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1 );
+
+
+    int maxId = 0;
+    for (ContactData c : after) {
+      if (c.getId() > maxId) {
+        maxId = c.getId();
+      }
+    }
+    contact.setId(maxId);
+    before.add(contact);
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 }

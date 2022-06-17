@@ -1,7 +1,11 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private final String id;
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  private int id;
   private final String firstName;
   private final String lastName;
   private final String company;
@@ -13,7 +17,7 @@ public class ContactData {
   private final String year;
   private String group;
 
-  public ContactData(String id, String firstName, String lastName, String company, String address
+  public ContactData(int id, String firstName, String lastName, String company, String address
           , String mobile, String email, int day, int month, String year, String group) {
     this.id = id;
     this.firstName = firstName;
@@ -28,9 +32,10 @@ public class ContactData {
     this.group = group;
   }
 
+
   public ContactData(String firstName, String lastName, String company, String address
           , String mobile, String email, int day, int month, String year, String group) {
-    this.id = null;
+    this.id = 0;
     this.firstName = firstName;
     this.lastName = lastName;
     this.company = company;
@@ -42,7 +47,7 @@ public class ContactData {
     this.year = year;
     this.group = group;
   }
-  public String getId() {
+  public int getId() {
     return id;
   }
 
@@ -86,7 +91,6 @@ public class ContactData {
     return group;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -94,14 +98,14 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
-    if (id != null ? !id.equals(that.id) : that.id != null) return false;
+    if (id != that.id) return false;
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
     return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
   }
 
   @Override
   public int hashCode() {
-    int result = id != null ? id.hashCode() : 0;
+    int result = id;
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
@@ -110,7 +114,7 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-            "id='" + id + '\'' +
+            "id=" + id +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             '}';
