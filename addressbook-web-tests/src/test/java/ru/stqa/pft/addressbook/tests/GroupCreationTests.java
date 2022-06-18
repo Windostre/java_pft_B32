@@ -11,13 +11,17 @@ public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() {
-    app.getNavigationHelper().gotoGroupPage();
-    List<GroupData> before = app.getGroupHelper().getGroupList(); // количество групп до
+    app.goTo().GroupPage();
+    /* Тестовые данные */
+    List<GroupData> before = app.group().list(); // количество групп до
     GroupData group = new GroupData("test2", null, null);
-    app.getGroupHelper().createGroup(group);
-    List<GroupData> after = app.getGroupHelper().getGroupList(); // количество групп после
+    /* Тест */
+    app.group().create(group);
+    /* Проверка количества групп*/
+    List<GroupData> after = app.group().list(); // количество групп после
     Assert.assertEquals(after.size(), before.size() + 1);
-    // Вычисляем макс id
+
+    /* Проверка содержания списка групп */
     /* способ сравнения при помощи цикла
     int maxId = 0; // допущение, что id новой группы должен быть максимальным
     for (GroupData g : after) {
@@ -38,8 +42,7 @@ public class GroupCreationTests extends TestBase {
     group.setId(maxId);
     */
 
-    /*Сравнение через анонимную функциию*/
-    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // Сравнение через анонимную функциию
     before.add(group); // присваиваем новый Id для группы
     Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.sort(byId);

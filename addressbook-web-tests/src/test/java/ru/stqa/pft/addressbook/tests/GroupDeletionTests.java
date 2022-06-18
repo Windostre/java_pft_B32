@@ -11,23 +11,27 @@ public class GroupDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePrecondition() {
     /* Предусловие: проверка наличия группы */
-    app.getNavigationHelper().gotoGroupPage();
-    if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+    app.goTo().GroupPage();
+    if (app.group().list().size() == 0) {
+      app.group().create(new GroupData("test1", null, null));
     }
   }
 
   @Test
   public void testGroupDeletion() {
-    List<GroupData> before = app.getGroupHelper().getGroupList(); // список групп до
-    app.getGroupHelper().selectGroup(before.size() - 1);
-    app.getGroupHelper().deleteSelectedGroups();
-    app.getGroupHelper().returnToGroupPage();
-    List<GroupData> after = app.getGroupHelper().getGroupList(); // список групп после
+    /* Тестовые данные */
+    List<GroupData> before = app.group().list(); // список групп до
+    int index = before.size() - 1;
+    /* Тест */
+    app.group().delete(index);
+    /* Проверка количества групп*/
+    List<GroupData> after = app.group().list(); // список групп после
     Assert.assertEquals(after.size(), before.size() - 1); // проверка размеров списка
-
-    before.remove(before.size() - 1);
+    /* Проверка содержания списка групп */
+    before.remove(index);
     Assert.assertEquals(before, after); // проверка элементов списка цикл встроен в testng
   }
+
+
 
 }
