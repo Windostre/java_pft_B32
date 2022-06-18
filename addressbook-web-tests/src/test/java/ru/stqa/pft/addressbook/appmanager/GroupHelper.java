@@ -55,12 +55,20 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
+  public void modifyGroup(int index, GroupData group) {
+    selectGroup(index); // выбран последний эллемент
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnToGroupPage();
+  }
+
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
   }
 
   public int getGroupCount() {
-    return  wd.findElements(By.name("selected[]")).size();
+    return wd.findElements(By.name("selected[]")).size();
   }
 
   public List<GroupData> getGroupList() {
