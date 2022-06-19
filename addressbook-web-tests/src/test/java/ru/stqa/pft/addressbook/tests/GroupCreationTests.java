@@ -14,7 +14,7 @@ public class GroupCreationTests extends TestBase {
     app.goTo().GroupPage();
     /* Тестовые данные */
     List<GroupData> before = app.group().list(); // количество групп до
-    GroupData group = new GroupData("test2", null, null);
+    GroupData group = new GroupData().withName("test2");
     /* Тест */
     app.group().create(group);
     /* Проверка количества групп*/
@@ -42,13 +42,12 @@ public class GroupCreationTests extends TestBase {
     group.setId(maxId);
     */
 
-    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // Сравнение через анонимную функциию
-    before.add(group); // присваиваем новый Id для группы
+    //group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // Сравнение через анонимную функциию
+    before.add(group);
     Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.sort(byId);
     after.sort(byId);
-
-    Assert.assertEquals(before, after); // проверка элементов списка - списки преобразованы в множества
+    Assert.assertEquals(before, after);
   }
 
 }

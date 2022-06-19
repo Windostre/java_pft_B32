@@ -14,7 +14,7 @@ public class GroupModificationTests extends TestBase {
     /* Предусловие: проверка наличия группы */
     app.goTo().GroupPage();
     if (app.group().list().size() == 0) {
-      app.group().create(new GroupData("test1", null, null));
+      app.group().create(new GroupData().withName("test1"));
     }
   }
 
@@ -23,7 +23,8 @@ public class GroupModificationTests extends TestBase {
     /* Тестовые данные */
     List<GroupData> before = app.group().list(); // список групп до
     int index = before.size() - 1;
-    GroupData group = new GroupData(before.get(index).getId(), "edited1", "edited2", "edited3");
+    GroupData group = new GroupData()
+            .withId(before.get(index).getId()).withName("edited1").withHeader("edited2").withFooter("edited3");
     /* Тест */
     app.group().modify(index, group);
     /* Проверка количества групп*/

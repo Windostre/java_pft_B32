@@ -10,12 +10,12 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactCreationTests() throws Exception {
     /*  Проверка наличия группы для создания контакта, если нет - создать */
     app.goTo().GroupPage();
     if (!app.group().isThereAGroup()) {
-      app.group().create(new GroupData("test1", null, null));
+      app.group().create(new GroupData().withName("test1"));
     }
     /* Тест */
     app.goTo().gotoHomePage();
