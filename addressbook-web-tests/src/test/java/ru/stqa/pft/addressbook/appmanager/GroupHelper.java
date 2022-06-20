@@ -60,8 +60,8 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
-  public void modify(int index, GroupData group) {
-    selectGroup(index); // выбран последний эллемент
+  public void modify(GroupData group) {
+    selectGroupById(group.getId()); // выбран последний эллемент
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();

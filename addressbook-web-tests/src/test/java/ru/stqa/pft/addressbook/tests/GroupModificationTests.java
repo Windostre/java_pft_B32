@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
-
 import java.util.*;
 
 public class GroupModificationTests extends TestBase {
@@ -13,7 +12,7 @@ public class GroupModificationTests extends TestBase {
   public void ensurePrecondition() {
     /* Предусловие: проверка наличия группы */
     app.goTo().GroupPage();
-    if (app.group().list().size() == 0) {
+    if (app.group().all().size() == 0) {
       app.group().create(new GroupData().withName("test1"));
     }
   }
@@ -21,21 +20,18 @@ public class GroupModificationTests extends TestBase {
   @Test
   public void testGroupModification() {
     /* Тестовые данные */
-    List<GroupData> before = app.group().list(); // список групп до
-    int index = before.size() - 1;
+    Set<GroupData> before = app.group().all(); // множестов групп до
+    GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
-            .withId(before.get(index).getId()).withName("edited1").withHeader("edited2").withFooter("edited3");
+            .withId(modifiedGroup.getId()).withName("edited1").withHeader("edited2").withFooter("edited3");
     /* Тест */
-    app.group().modify(index, group);
+    app.group().modify(group);
     /* Проверка количества групп*/
-    List<GroupData> after = app.group().list(); // список групп после
+    Set<GroupData> after = app.group().all(); // множетсов групп после
     Assert.assertEquals(after.size(), before.size()); // проверка размеров списка
     /* Проверка содержания списка групп */
-    before.remove(index);
+    before.remove(modifiedGroup);
     before.add(group);
-    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
     // Метод сортировка до лямбда выражения и сравнениея Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // проверка элементов списка - списки преобразованы в множества
 
