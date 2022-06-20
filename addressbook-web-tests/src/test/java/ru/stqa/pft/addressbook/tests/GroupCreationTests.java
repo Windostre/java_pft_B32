@@ -3,9 +3,9 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
-
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
@@ -13,12 +13,12 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
     app.goTo().GroupPage();
     /* Тестовые данные */
-    List<GroupData> before = app.group().list(); // количество групп до
+    Set<GroupData> before = app.group().all(); // количество групп до
     GroupData group = new GroupData().withName("test2");
     /* Тест */
     app.group().create(group);
     /* Проверка количества групп*/
-    List<GroupData> after = app.group().list(); // количество групп после
+    Set<GroupData> after = app.group().all(); // количество групп после
     Assert.assertEquals(after.size(), before.size() + 1);
 
     /* Проверка содержания списка групп */
@@ -42,11 +42,14 @@ public class GroupCreationTests extends TestBase {
     group.setId(maxId);
     */
 
-    //group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId()); // Сравнение через анонимную функциию
+    group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()); //из коллекции after,  где есть группы с id
+    // , превращаем в поток, затем этот поток превращаем в поток иденитификаторов, в качестве параметров ипм-ем анонимную функцию
+    // , которая на вход получает GroupData - группу и првращает ее в целые числа
     before.add(group);
-    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+   /* // Так как заменили List на all - работает с множеством, то отпадает необходимость в сортировке множетва
+   Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.sort(byId);
-    after.sort(byId);
+    after.sort(byId);*/
     Assert.assertEquals(before, after);
   }
 
