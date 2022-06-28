@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test (enabled = false)
+  @Test
   public void testContactCreationTests() throws Exception {
     /*  Проверка наличия группы для создания контакта, если нет - создать */
     app.goTo().GroupPage();
